@@ -1,0 +1,355 @@
+body,
+html {
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+    font-weight: $regular;
+    text-rendering: optimizeLegibility;
+
+    @media (max-width: $mobile) {
+        font-size: 90%;
+    }
+
+    
+}
+
+div {
+    transition: 0.25;
+}
+
+a {
+    transition: 0.25s;
+    color: inherit;
+
+    &:hover {
+        transition: 0.25s;
+    }
+}
+
+strong {
+    font-weight: $semi;
+}
+
+.content {
+    p {
+        margin: 20px 0 0;
+    }
+}
+
+p a {
+    text-decoration: underline;
+}
+
+#login h1 a,
+.login h1 a {
+    background-size: contain !important;
+}
+
+.text-right {
+    text-align: right;
+}
+
+a.animated-hover {
+    &::after {
+        content: "";
+        background: $white;
+        bottom: 0;
+        height: 2px;
+        left: 0;
+        position: absolute;
+        transition: width 0.25s ease-out;
+        width: 0%;
+    }
+
+    &:hover::after {
+        transition: width 0.25s ease-in-out;
+        width: 100%;
+    }
+}
+
+.orange-underline {
+    &::after {
+        content: "";
+        background: $orange;
+        bottom: 0;
+        height: 2px;
+        position: absolute;
+        transition: width 0.25s ease-out;
+        width: 60%;
+        left: 0%;
+        right: 0%;
+        bottom: -20px;
+        margin: auto;
+    }
+}
+
+h1 {
+    font-size: 4.1em;
+    font-weight: $bold;
+    position: relative;
+
+    &.orange-underline {
+        margin-bottom: 50px;
+    }
+}
+
+h2 {
+    font-size: 3em;
+}
+
+h3 {
+    font-size: 2em;
+    margin: 10px 0;
+}
+
+h4 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+h5 {
+    font-size: 1.25em;
+    font-weight: $semi;
+    margin: 10px 0;
+}
+
+p {
+    line-height: 25px;
+}
+
+#person-content {
+    p {
+        margin: 10px 0;
+    }
+
+    ul {
+        position: relative;
+
+        li {
+            line-height: 1.3em;
+            margin: 15px 0;
+            padding-left: 15px;
+            position: relative;
+
+            &::before {
+                border: 1px solid $med-gray;
+                border-radius: 20px;
+                content: '';
+                display: block;
+                height: 7px;
+                left: 0;
+                position: absolute;
+                top: 4px;
+                width: 7px;
+            }
+
+            ul {
+                padding: 0;
+
+                &::before {
+                    border-left: 0;
+                    border-top: 0;
+                }
+
+                li {
+                    &::before {
+                        border: 1px solid $light-gray;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.flex {
+    width: 100%;
+    height: 100%;
+}
+
+.intro-block + section {
+    margin-top: 0 !important;
+}
+
+section {
+    margin: 40px 0;
+    padding: 0 20px;
+    width: 100%;
+    clear: both;
+    display: inline-block;
+}
+
+.btn {
+    color: $dark-gray;
+    display: inline-block;
+    text-decoration: none;
+    margin: 20px 0;
+}
+
+.sm-btn {
+    padding: 10px;
+}
+
+.med-btn {
+    padding: 15px 20px;
+}
+
+.lg-btn {
+    padding: 20px 30px;
+}
+
+.gform_button {
+    @extend .btn;
+    @extend .med-btn;
+    @extend .orange-btn-alt;
+    background: $orange !important;
+    border-radius: 0 !important;
+    float: left;
+}
+
+.clear-btn {
+    border: 1px solid $black;
+    background: $white;
+    color: $black;
+
+    &:hover {
+        background: $dark-gray;
+        color: $white;
+    }
+}
+
+.orange-btn {
+    background: $orange;
+    color: $white;
+
+    &:hover {
+        background: $white;
+        color: $orange;
+    }
+}
+
+.orange-btn-alt {
+    background: $orange;
+    color: $white;
+
+    &:hover {
+        background: $dark-gray;
+        color: $white;
+    }
+}
+
+.big-btn {
+    background: $white;
+    color: $dark-gray;
+    padding: 20px 30px;
+    clear: both;
+    text-decoration: none;
+    font-size: 1.3em;
+
+    &:hover {
+        background: $dark-gray;
+        color: $white;
+    }
+
+}
+
+.right-corner-angle {
+    position: relative;
+
+    &:before {
+        content: '';
+        height: 70px;
+        width: 10px;
+        display: block;
+        position: absolute;
+        right: -5px;
+        top: 0;
+        background: $orange;
+        z-index: 10;
+    }
+
+    &:after {
+        content: '';
+        width: 70px;
+        height: 10px;
+        display: block;
+        position: absolute;
+        right: -5px;
+        top: -5px;
+        background: $orange;
+        z-index: 10;
+    }
+}
+
+.left-corner-angle {
+    position: relative;
+
+    &:before {
+        content: '';
+        height: 70px;
+        width: 10px;
+        display: block;
+        position: absolute;
+        left: -5px;
+        top: 0;
+        background: $orange;
+        z-index: 10;
+    }
+
+    &:after {
+        content: '';
+        width: 70px;
+        height: 10px;
+        display: block;
+        position: absolute;
+        left: -5px;
+        top: -5px;
+        background: $orange;
+        z-index: 10;
+    }
+}
+
+.repeating-lines {
+    background: url('../images/repeating-lines.png') repeat-x;
+    height: 16px;
+    width: 70%;
+}
+
+.no-top-margin {
+    margin-top: 0;
+}
+
+.interior #login {
+    max-width: 500px;
+    margin: auto;
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 10px;
+        width: 100%;
+        float: left;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        background: $light-gray;
+    }
+}
+
+@media (max-width: $mobile) {
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: block;
+    }
+}
+
+@media (min-width: $desktop) {
+    .desktop {
+        display: block;
+    }
+
+    .mobile {
+        display: none;
+    }
+}

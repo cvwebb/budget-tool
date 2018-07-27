@@ -3,10 +3,9 @@ html {
     -webkit-font-smoothing: antialiased;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 16px;
-    font-weight: $regular;
     text-rendering: optimizeLegibility;
 
-    @media (max-width: $mobile) {
+    @media (max-width: 480px) {
         font-size: 90%;
     }
 

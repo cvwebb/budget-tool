@@ -22,15 +22,15 @@
         </div>
         
         <div id="income" class="show">
-            <h2>What's your income?</h2>
+            <h2>How much is in your account?</h2>
             <form action="#">
-                <input type="text" placeholder="$1000" id="user-income">
-                <select name="frequency" id="frequency">
+                <input type="number" placeholder="$1000" id="user-income">
+                <!-- <select name="frequency" id="frequency">
                     <option>How often are you paid?</option>
                     <option value="7">Every week</option>
                     <option value="14">Every two weeks</option>
                     <option value="15">Every 15 days</option>
-                </select>
+                </select> -->
                 Select your next pay date
                 <input type="date" id="pay-date">
                 <p id="date-output"></p>
@@ -42,21 +42,23 @@
             <h2>Add all of your bills</h2>
             <div class="bills-header">
                 <input type="text" id="bill-name" placeholder="Mortgage, Water...etc">
-                <select name="bill-frequency" id="bill-frequency">
+                <!-- <select name="bill-frequency" id="bill-frequency">
                     <option>Frequency</option>
                     <option value="7">Every week</option>
                     <option value="14">Every two weeks</option>
                     <option value="30">Every Month</option>
-                </select>
-                <input type="text" id="bill-cost" placeholder="$20">
+                </select> -->
+                <input type="number" id="bill-cost" placeholder="$20">
                 <input type="date" id="bill-date">
                 <button id="add-bill" type="submit">Add</button>
             </div>
 
-            <ul id="bill-list">
-
-            </ul>
+            <ul id="bill-list"></ul>
         </div>
+
+        <div id="total-bills"></div>
+        
+        <div id="money-leftover"></div>
     
         <script src="js/main.js"></script>
     </body>

@@ -1,4 +1,6 @@
-@import "node_modules/normalize.css/normalize";
+@import "../node_modules/normalize.css/normalize.css";
+// @import "partials/reset";
+// @import "partials/base-general";
 
 // styles.scss
 
@@ -12,4 +14,20 @@
 
 .hide {
     display: none;
+}
+
+.due-soon {
+    border: 1px solid yellow;
+}
+
+.due-today {
+    border: 1px solid orange;
+}
+
+.past-due {
+    border: 1px solid red;
+}
+
+.future {
+    border: 1px solid green;
 }

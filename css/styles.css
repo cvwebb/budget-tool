@@ -16,15 +16,15 @@
 }
 
 .due-today {
-  border: 1px solid orange;
+  border: 1px solid green;
 }
 
 .past-due {
-  border: 1px solid red;
+  opacity: 0.2;
 }
 
 .future {
-  border: 1px solid green;
+  opacity: 0.2;
 }
 
 /*# sourceMappingURL=css/styles.css.map */

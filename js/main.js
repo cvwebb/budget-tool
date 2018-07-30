@@ -2,12 +2,8 @@ let el = function(id) {
     return document.getElementById(id);
 }
 
-saveBills = function(e) {
-    e.preventDefault();
-    localStorage.setItem("bill", JSON.stringify(bill));
-}
-
 var storedBills = JSON.parse(localStorage.getItem("bill"));
+
 
 chooseDate = function() {
     var x = document.getElementById("pay-date").value;
@@ -39,12 +35,13 @@ userSummary = function() {
 }
 
 /* Show current bills */
-bill = [];
+if (localStorage.getItem('bill')) {
+    bill = JSON.parse(localStorage.getItem('bill'));
+} else {
+    bill = [];
+}
 
-storedBills.forEach(bill => {
-    el('show-storage').innerHTML += '<li class="future"> Next Paycheck <strong>Name:</strong> ' + bill.name + ' <strong>Cost:</strong> ' + bill.cost + ' <strong>Due Date:</strong> ' + bill.date + '<a href="#" id="remove-bill"> Remove Bill</a>' + '</li>';
-});
-
+console.log(storedBills);
 showBills = function() {
     el('bill-list').innerHTML = '';
 
@@ -79,6 +76,7 @@ var billList = el('bill-list');
 billList.addEventListener('click', function(e) {
     var index = e.target.getAttribute('data-value');
     bill.splice(index, 1);
+    localStorage.setItem("bill", JSON.stringify(bill));
 
     totalBills();
     showBills();  
@@ -86,7 +84,8 @@ billList.addEventListener('click', function(e) {
 
 /* Add to list of bills */
 
-addBill = function() {
+addBill = function(e) {
+    e.preventDefault();
     billName = el('bill-name').value;
     billCost = el('bill-cost').value; 
     billDateInput = el('bill-date').value; 
@@ -101,15 +100,13 @@ addBill = function() {
         date: billDate
     }
 
-    console.log('bill date' + billDate + 'today' + today);
-
     if (billCost.length == 0) {
         alert('Please enter a cost')
     } else if (fullBillDate < fullToday) {
         alert('Please enter a future date');
-        console.log(billDate + 'vs' + today)
     } else {
         bill.push(newBill);
+        localStorage.setItem("bill", JSON.stringify(bill));
         totalBills();
         showBills();
     }
@@ -145,5 +142,3 @@ var totalBills = function() {
 el('next').addEventListener('click', userPay);
 
 el('add-bill').addEventListener('click', addBill);
-
-el('save-bills').addEventListener('click', saveBills);

@@ -3,6 +3,7 @@ let el = function(id) {
 }
 
 var storedBills = JSON.parse(localStorage.getItem("bill"));
+var getPayDate = moment(JSON.parse(localStorage.getItem("setNextPay")));
 
 
 chooseDate = function() {
@@ -11,18 +12,14 @@ chooseDate = function() {
 }
 
 var userIncome = 0;
-var userNextPay = '';
-var formattedUserNextPay = '';
 var um = '';
 var md = '';
 var umd = '';
 
 userPay = function() {
     userIncome = el('user-income').value;
-    // userPayFreq = el('frequency').value,
-    nextPayVal = el('pay-date').value
-    userNextPay = moment(nextPayVal);
-    formattedUserNextPay = userNextPay.format('LL');
+    userNextPay = moment(el('pay-date').value);
+    localStorage.setItem('setNextPay', JSON.stringify(userNextPay));
 
     userSummary();
     totalBills();
@@ -31,8 +28,11 @@ userPay = function() {
 
 
 userSummary = function() {
-    return document.getElementById('info').innerHTML = 'You have ' + '<strong>$' + userIncome + '</strong> in your account, until you get paid again on <strong>' + formattedUserNextPay + '</strong>';
+    getPayDate = moment(JSON.parse(localStorage.getItem("setNextPay")));
+    return document.getElementById('info').innerHTML = 'You have ' + '<strong>$' + userIncome + '</strong> in your account, until you get paid again on <strong>' + moment(getPayDate).format('LL') + '</strong>';
 }
+
+userSummary();
 
 /* Show current bills */
 if (localStorage.getItem('bill')) {
@@ -56,9 +56,9 @@ showBills = function() {
         var md = billDue.format('LL');
         today = moment();
 
-        if (billDue > userNextPay) {
+        if (billDue > getPayDate) {
             el('bill-list').innerHTML += '<li class="future"> Next Paycheck <strong>Name:</strong> ' + bill[i].name + ' <strong>Cost:</strong> ' + bill[i].cost + ' <strong>Due Date:</strong> ' + md + '<a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a>' + '</li>';
-        } else if (billDue > today && billDue <= userNextPay ) {
+        } else if (billDue > today && billDue <= getPayDate ) {
             el('bill-list').innerHTML += '<li class="due-soon"> DUE this paycheck <strong>Name:</strong> ' + bill[i].name + ' <strong>Cost:</strong> ' + bill[i].cost + ' <strong>Due Date:</strong> ' + md + '<a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a>' + '</li>';
         } else if (billDue < today) {
             el('bill-list').innerHTML += '<li class="past-due">  <strong>Name:</strong> ' + bill[i].name + ' <strong>Cost:</strong> ' + bill[i].cost + ' <strong>Due Date:</strong> ' + md + '<a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a>' + '</li>';
@@ -123,7 +123,7 @@ var totalBills = function() {
         var billDate = currentValue.date;
         var billDateMoment = moment(billDate);
 
-        if (billDateMoment < userNextPay) {
+        if (billDateMoment < moment(getPayDate)) {
             return accumulator + currentValue.cost;
         } else if (billDateMoment < today) {
             return accumulator + 0;
@@ -135,8 +135,10 @@ var totalBills = function() {
     leftover = userIncome - billTotal;
 
     return el('total-bills').innerHTML = 'You have $' + billTotal + ' in bills',
-    el('money-leftover').innerHTML = 'You have $' + leftover + ' leftoveruntil your next paycheck (' + formattedUserNextPay + ')';
+    el('money-leftover').innerHTML = 'You have $' + leftover + ' leftoveruntil your next paycheck (' + moment(getPayDate).format('LL') + ')';
 }
+
+totalBills();
 
 
 el('next').addEventListener('click', userPay);

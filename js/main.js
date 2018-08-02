@@ -110,7 +110,7 @@ addBill = function(e) {
     newBill = {
         name: billName,
         cost: parseInt(billCost, 10),
-        date: billDate // billFun()
+        date: billFun() // billDate
     }
 
     if (billCost.length == 0) {
@@ -156,14 +156,20 @@ totalBills();
 var updateBillDate = function() {
     var getBills = JSON.parse(localStorage.getItem("bill")); // get whats in storage
     var today = moment(); // get todays date
+    bill = []; // clear the bills array
 
     for (var i = 0; i < getBills.length; i++) { // loop through storage
         var getBillDate = getBills[i].date; // get the current bill date
         console.log('working');
+        var updatedBill = '';
 
-        if (getBillDate < today) { // if the bill date has expired
-            var updatedBill = moment(getBillDate).add(1, 'M').format('LL'); // add one month to the date
+        if (moment(getBills[i].date) < today) { // if the bill date has expired
+            updatedBill = moment(getBills[i].date).add(1, 'M').format('LL'); // add one month to the date
+            console.log(updatedBill);
+        } else {
+            updatedBill = getBills[i].date;
         }
+
 
         updateBill = { // create a new object
             name: getBills[i].name, // update name with whats already in storage
@@ -174,8 +180,12 @@ var updateBillDate = function() {
         bill.push(updateBill); // push the object to the bill array
     }
 
-    localStorage.removeItem(bill);
-    localStorage.setItem('bill', JSON.stringify(bill)); // once the loop is finished, push the bill to local storage
+    localStorage.removeItem('bill'); // clear the key
+    localStorage.setItem('bill', JSON.stringify(bill)); // once the loop is finished, push the bill to local storage and reset the key
+    bill = JSON.parse(localStorage.getItem("bill")); // get the bills again
+
+    showBills();
+    totalBills();
 } ();
 
 

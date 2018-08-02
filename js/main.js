@@ -4,7 +4,9 @@ let el = function(id) {
 
 var storedBills = JSON.parse(localStorage.getItem("bill"));
 var getPayDate = moment(JSON.parse(localStorage.getItem("setNextPay")));
+var getUserIncome = JSON.parse(localStorage.getItem("setUserIncome"));
 
+console.log(getUserIncome);
 
 chooseDate = function() {
     var x = document.getElementById("pay-date").value;
@@ -20,6 +22,7 @@ userPay = function() {
     userIncome = el('user-income').value;
     userNextPay = moment(el('pay-date').value);
     localStorage.setItem('setNextPay', JSON.stringify(userNextPay));
+    localStorage.setItem('setUserIncome', JSON.stringify(userIncome));
 
     userSummary();
     totalBills();
@@ -29,10 +32,13 @@ userPay = function() {
 
 userSummary = function() {
     getPayDate = moment(JSON.parse(localStorage.getItem("setNextPay")));
-    return document.getElementById('info').innerHTML = 'You have ' + '<strong>$' + userIncome + '</strong> in your account, until you get paid again on <strong>' + moment(getPayDate).format('LL') + '</strong>';
+    getUserIncome = JSON.parse(localStorage.getItem("setUserIncome"));
+    return document.getElementById('info').innerHTML = 'You have ' + '<strong>$' + getUserIncome + '</strong> in your account, until you get paid again on <strong>' + moment(getPayDate).format('LL') + '</strong>';
 }
 
-userSummary();
+if (getUserIncome > 1) {
+    userSummary();
+}
 
 /* Show current bills */
 if (localStorage.getItem('bill')) {
@@ -41,7 +47,6 @@ if (localStorage.getItem('bill')) {
     bill = [];
 }
 
-console.log(storedBills);
 showBills = function() {
     el('bill-list').innerHTML = '';
 
@@ -80,7 +85,7 @@ billList.addEventListener('click', function(e) {
 
     totalBills();
     showBills();  
-})
+});
 
 /* Add to list of bills */
 
@@ -94,16 +99,22 @@ addBill = function(e) {
     var fullToday = moment();
     var today = fullToday.format('LL');
 
+    var billFun = function() {
+        if (billDate < today) {
+            return moment(billDate).add(1, 'M');
+        } else {
+            return billDate;
+        }
+    }
+
     newBill = {
         name: billName,
         cost: parseInt(billCost, 10),
-        date: billDate
+        date: billFun()
     }
 
     if (billCost.length == 0) {
         alert('Please enter a cost')
-    } else if (fullBillDate < fullToday) {
-        alert('Please enter a future date');
     } else {
         bill.push(newBill);
         localStorage.setItem("bill", JSON.stringify(bill));

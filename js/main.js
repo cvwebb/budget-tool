@@ -151,6 +151,31 @@ var totalBills = function() {
 
 totalBills();
 
+// Update Bill Date
+
+var updateBillDate = function() {
+    var getBills = JSON.parse(localStorage.getItem("bill")); // get whats in storage
+    var today = moment(); // get todays date
+
+    for (var i = 0; i < getBills.length; i++) { // loop through storage
+        var getBillDate = getBills[i].date; // get the current bill date
+
+        if (getBillDate < today) { // if the bill date has expired
+            var updatedBill = moment(getBillDate).add(1, 'M').format('LL'); // add one month to the date
+        }
+
+        updateBill = { // create a new object
+            name: getBills[i].name, // update name with whats already in storage
+            cost: parseInt(getBills[i].cost, 10), // update cost with whats already in storage
+            date: updatedBill // update date with updated bill
+        }
+
+        bill.push(updateBill); // push the object to the bill array
+    }
+
+    localStorage.setItem('bill', JSON.stringify(bill)); // once the loop is finished, push the bill to local storage
+}
+
 
 el('next').addEventListener('click', userPay);
 

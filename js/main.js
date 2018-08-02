@@ -110,7 +110,7 @@ addBill = function(e) {
     newBill = {
         name: billName,
         cost: parseInt(billCost, 10),
-        date: billFun()
+        date: billDate // billFun()
     }
 
     if (billCost.length == 0) {
@@ -159,6 +159,7 @@ var updateBillDate = function() {
 
     for (var i = 0; i < getBills.length; i++) { // loop through storage
         var getBillDate = getBills[i].date; // get the current bill date
+        console.log('working');
 
         if (getBillDate < today) { // if the bill date has expired
             var updatedBill = moment(getBillDate).add(1, 'M').format('LL'); // add one month to the date
@@ -173,8 +174,9 @@ var updateBillDate = function() {
         bill.push(updateBill); // push the object to the bill array
     }
 
+    localStorage.removeItem(bill);
     localStorage.setItem('bill', JSON.stringify(bill)); // once the loop is finished, push the bill to local storage
-}
+} ();
 
 
 el('next').addEventListener('click', userPay);

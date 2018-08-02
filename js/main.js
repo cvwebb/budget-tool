@@ -62,13 +62,13 @@ showBills = function() {
         today = moment();
 
         if (billDue > getPayDate) {
-            el('bill-list').innerHTML += '<li class="future"> Next Paycheck <strong>Name:</strong> ' + bill[i].name + ' <strong>Cost:</strong> ' + bill[i].cost + ' <strong>Due Date:</strong> ' + md + '<a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a>' + '</li>';
+            el('bill-list').innerHTML += '<li class="future"> Future <strong>Name:</strong> ' + bill[i].name + ' <strong>Frequency:</strong> ' + bill[i].frequency + ' <strong>Cost:</strong> ' + bill[i].cost + ' <strong>Due Date:</strong> ' + md + '<a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a>' + '</li>';
         } else if (billDue > today && billDue <= getPayDate ) {
-            el('bill-list').innerHTML += '<li class="due-soon"> DUE this paycheck <strong>Name:</strong> ' + bill[i].name + ' <strong>Cost:</strong> ' + bill[i].cost + ' <strong>Due Date:</strong> ' + md + '<a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a>' + '</li>';
+            el('bill-list').innerHTML += '<li class="due-soon"> DUE this paycheck <strong>Name:</strong> ' + bill[i].name + ' <strong>Frequency:</strong> ' + bill[i].frequency + ' <strong>Cost:</strong> ' + bill[i].cost + ' <strong>Due Date:</strong> ' + md + '<a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a>' + '</li>';
         } else if (billDue < today) {
-            el('bill-list').innerHTML += '<li class="past-due">  <strong>Name:</strong> ' + bill[i].name + ' <strong>Cost:</strong> ' + bill[i].cost + ' <strong>Due Date:</strong> ' + md + '<a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a>' + '</li>';
+            el('bill-list').innerHTML += '<li class="past-due">  <strong>Name:</strong> ' + bill[i].name + ' <strong>Frequency:</strong> ' + bill[i].frequency + ' <strong>Cost:</strong> ' + bill[i].cost + ' <strong>Due Date:</strong> ' + md + '<a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a>' + '</li>';
         } else if (billDue == today) {
-            el('bill-list').innerHTML += '<li class="due-today"> <strong>Name:</strong> ' + bill[i].name + ' <strong>Cost:</strong> ' + bill[i].cost + ' <strong>Due Date:</strong> ' + md + '<a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a>' + '</li>';
+            el('bill-list').innerHTML += '<li class="due-today"> <strong>Name:</strong> ' + bill[i].name + ' <strong>Frequency:</strong> ' + bill[i].frequency + ' <strong>Cost:</strong> ' + bill[i].cost + ' <strong>Due Date:</strong> ' + md + '<a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a>' + '</li>';
         }   
     }
 };
@@ -92,6 +92,7 @@ billList.addEventListener('click', function(e) {
 addBill = function(e) {
     e.preventDefault();
     billName = el('bill-name').value;
+    billFrequency = el('bill-frequency').value;
     billCost = el('bill-cost').value; 
     billDateInput = el('bill-date').value; 
     fullBillDate = moment(billDateInput);
@@ -109,6 +110,7 @@ addBill = function(e) {
 
     newBill = {
         name: billName,
+        frequency: billFrequency,
         cost: parseInt(billCost, 10),
         date: billFun() // billDate
     }
@@ -160,19 +162,28 @@ var updateBillDate = function() {
 
     for (var i = 0; i < getBills.length; i++) { // loop through storage
         var getBillDate = getBills[i].date; // get the current bill date
+        var getBillFrequency = getBills[i].frequency; // get the current bill date
         console.log('working');
         var updatedBill = '';
 
-        if (moment(getBills[i].date) < today) { // if the bill date has expired
+        if (moment(getBills[i].date) < today && getBills[i].frequency == 1) { // if the bill date has expired and is equal to 1, add a month
             updatedBill = moment(getBills[i].date).add(1, 'M').format('LL'); // add one month to the date
             console.log(updatedBill);
+        } else if (moment(getBills[i].date) < today && getBills[i].frequency == 2) { // if the bill date has expired and is equal to 2, add 2 weeks
+            updatedBill = moment(getBills[i].date).add(2, 'week').format('LL'); // add 2 weeks to the date
+            console.log(updatedBill);
+        } else if (moment(getBills[i].date) < today && getBills[i].frequency == 3) { // if the bill date has expired and is equal to 3, add 3 months (quarterly)
+            updatedBill = moment(getBills[i].date).add(3, 'M').format('LL'); // add 3 months to the date
+            console.log(updatedBill);
+        } else if (moment(getBills[i].date) > getPayDate && getBills[i].frequency == 4) { // one time use
+            localStorage.removeItem(getBills[i]);
         } else {
             updatedBill = getBills[i].date;
         }
 
-
         updateBill = { // create a new object
             name: getBills[i].name, // update name with whats already in storage
+            frequency: getBills[i].frequency, // update frequency with whats already in storage
             cost: parseInt(getBills[i].cost, 10), // update cost with whats already in storage
             date: updatedBill // update date with updated bill
         }
@@ -184,9 +195,15 @@ var updateBillDate = function() {
     localStorage.setItem('bill', JSON.stringify(bill)); // once the loop is finished, push the bill to local storage and reset the key
     bill = JSON.parse(localStorage.getItem("bill")); // get the bills again
 
-    showBills();
     totalBills();
-} ();
+    showBills();
+};
+
+if (storedBills) { // running the updateBillDate function without storage already set, prevents the user from adding bills
+    updateBillDate();
+} else {
+    console.log('empty')
+}
 
 
 el('next').addEventListener('click', userPay);

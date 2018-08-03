@@ -13,6 +13,11 @@ a {
   color: #4A90E2 !important;
 }
 
+#remove-bill {
+  color: #fc6576 !important;
+  padding-left: 15px;
+}
+
 strong {
   font-weight: 700;
 }
@@ -221,6 +226,36 @@ h3 {
 .align-right .aligner {
   padding-left: 5px;
   font-style: italic;
+}
+
+.account-header {
+  font-size: 30px;
+  color: #4A90E2;
+}
+
+.total-bill-header {
+  font-size: 30px;
+  color: #fc6576;
+}
+
+#date-header {
+  margin: 20px 0 10px;
+}
+#date-header h4 {
+  padding: 5px 0 5px;
+}
+
+.left-over-header {
+  font-size: 30px;
+  color: #9FCE6F;
+}
+
+.summary-key-info {
+  display: flex;
+  justify-content: space-between;
+}
+.summary-key-info div {
+  padding: 0 10px;
 }
 
 /*# sourceMappingURL=css/styles.css.map */

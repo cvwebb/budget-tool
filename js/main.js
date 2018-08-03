@@ -33,7 +33,8 @@ userPay = function() {
 userSummary = function() {
     getPayDate = moment(JSON.parse(localStorage.getItem("setNextPay")));
     getUserIncome = JSON.parse(localStorage.getItem("setUserIncome"));
-    return document.getElementById('info').innerHTML = 'Account: <h4><strong>$' + getUserIncome + '</strong> </h4><br /> Next pay date: <h4><strong>' + moment(getPayDate).format('LL') + '</strong></h4>';
+    return el('date-header').innerHTML = 'Next pay date: <h4><strong>' + moment(getPayDate).format('LL') + '</strong></h4>',
+            el('income-header').innerHTML = 'Account: <h4 class="account-header"><strong>$' + getUserIncome + '</strong> </h4>'
 }
 
 if (getUserIncome > 1) {
@@ -153,8 +154,8 @@ var totalBills = function() {
 
     leftover = getUserIncome - billTotal;
 
-    return el('total-bills').innerHTML = 'Total Bills: <h4><strong>$' + billTotal + '</strong></h4> <br />',
-    el('money-leftover').innerHTML = 'Left over: <h4><strong>$' + leftover + ' until next check</strong></h4>';
+    return el('total-bills').innerHTML = 'Total Bills: <h4 class="total-bill-header"><strong>$' + billTotal + '</strong></h4> <br />',
+    el('money-leftover').innerHTML = 'Left over: <h4 class="left-over-header"><strong>$' + leftover + '</strong></h4>';
 }
 
 totalBills();

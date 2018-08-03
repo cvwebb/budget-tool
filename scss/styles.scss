@@ -4,6 +4,22 @@
 
 // styles.scss
 
+* {box-sizing: border-box}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #4A4A4A;
+}
+
+a {
+    color: #4A90E2 !important;
+}
+
+strong {
+    font-weight: 700;
+}
+
 #income {
     display: block;
 }
@@ -17,7 +33,7 @@
 }
 
 .due-soon {
-    border: 1px solid yellow;
+    // border: 1px solid yellow;
 }
 
 .due-today {
@@ -29,5 +45,212 @@
 }
 
 .future {
-    opacity: 0.2;;
+    opacity: 0.2;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 30px;
+
+}
+
+
+
+h2 {
+    margin: 0;
+    font-weight: lighter;
+    font-size: 20px;
+}
+
+h4 {
+    margin: 0;
+}
+
+input {
+    background: #EEEEEE;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+input[type="date"] {
+    background: #EEEEEE;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    padding: 8px 0;
+    color:#898989;
+}
+
+input[type="date"]:before {
+    content: attr(placeholder) !important;
+    margin-right: 0.5em;
+  }
+  input[type="date"]:focus:before,
+  input[type="date"]:valid:before {
+    content: "";
+  }
+
+  .select-pay {
+      width: 100%;
+      margin-bottom: 20px;
+  }
+
+  h3 {
+      font-weight: lighter;
+      font-size: 14px;
+      margin: 5px 0 10px;
+  }
+
+  .button {
+      width: 100%;
+      background: #4A90E2;
+      text-align: center;
+      color: #fff;
+      padding: 11px 8px;
+      margin: auto;
+      border-radius: 5px;
+  }
+
+.align-horizontal {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    
+
+    #summary {
+        // position: fixed;
+        // top: 0;
+        // left: 0;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        text-align: center;
+        width: 49%;
+        margin: 0 0 0 1%;
+        order: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        input[type="date"] {
+            width: 100%;
+        }
+        
+    }
+    
+    #income {
+        padding: 20px 10px 30px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        text-align: center;
+        margin: auto;
+        width: 49%;
+        margin-right: 1%;
+        order: 1;
+
+        input {
+            width: 100%;
+        }
+    
+        h2 {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+#bills {
+    h2 {
+        text-align: center;
+        padding: 20px;
+    }
+}
+
+.bills-header {
+    display: flex;
+    max-width: 700px;
+
+    .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #EEEEEE;
+        border: 1px solid #CCCCCC;
+        border-radius: 5px;
+        padding: 0;
+        color:#898989;
+        margin-right: 2%;
+
+        input {
+            width: 100%;
+            background: none;
+            border: none;
+        }
+
+        &.name {
+            width: 20%;
+        }
+
+        &.frequency {
+            width: 20%;
+            background: #EEEEEE;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+
+            select {
+                width: 100%;
+                background: none;
+                border: none;
+            }
+        }
+
+        &.cost {
+            width: 10%;
+        }
+
+        &.date {
+            width: 20%;
+        }
+    }
+
+    .button {
+        width: 30%;
+        margin: initial;
+    }
+}
+
+#bill-list {
+    padding: 0;
+
+    li {
+        list-style: none;
+        width: 100%;
+        display: flex;
+        padding: 15px 0;
+        border-bottom: 1px dotted #ccc;
+        font-size: 12px;
+    }
+}
+
+.align-left {
+    width: 50%;
+    text-align: left;
+    display: flex;
+
+    .aligner:nth-child(even) {
+        padding-left: 3px;
+    }
+}
+
+.align-right {
+    width: 50%;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+
+    .aligner {
+        padding-left: 5px;
+        font-style: italic;
+    }
 }

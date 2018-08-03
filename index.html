@@ -10,55 +10,73 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900" rel="stylesheet">
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <div id="summary">
-            <h2>Summary</h2>
-            <p id="info">Loading...</p>
-        </div>
-        
-        <div id="income" class="show">
-            <h2>How much is in your account?</h2>
-            <form action="#">
-                <input type="number" placeholder="$1000" id="user-income">
-                <!-- <select name="frequency" id="frequency">
-                    <option>How often are you paid?</option>
-                    <option value="7">Every week</option>
-                    <option value="14">Every two weeks</option>
-                    <option value="15">Every 15 days</option>
-                </select> -->
-                Select your next pay date
-                <input type="date" id="pay-date">
-                <p id="date-output"></p>
-                <button id="next" type="submit">Update Summary</button>
-            </form>
-        </div>
+        <div class="container">
 
-        <div id="bills" class="show">
-            <h2>Add all of your bills</h2>
-            <div class="bills-header">
-                <input type="text" id="bill-name" placeholder="Mortgage, Water...etc">
-                <select name="bill-frequency" id="bill-frequency">
-                    <option value="1">Every Month</option>
-                    <option value="2">Every 2 Weeks</option>
-                    <option value="3">Every Quarter</option>
-                    <option value="4">One Time</option>
-                </select>
-                <input type="number" id="bill-cost" placeholder="$20">
-                <input type="date" id="bill-date">
-                <button id="add-bill" type="submit">Add</button>
+            <div class="align-horizontal">
+                <div id="summary">
+                    <div class="align-middle">
+                        <h2>Summary</h2>
+                        <p id="info">Loading...</p>
+                        <div id="total-bills"></div>
+                        <div id="money-leftover"></div>
+                    </div>
+                </div>
+                
+                <div id="income" class="show">
+                    <h3>How much is in your account?</h3>
+                    <form action="#">
+                        <div class="select-pay">
+                            <input type="number" placeholder="$1000" id="user-income" placeholder="Choose a Date">
+                        </div>
+
+                        <div class="select-pay-date">
+                            <h3>Select your next pay date </h3>
+                            <input type="date" id="pay-date">
+                            <p id="date-output"></p>
+                        </div>
+
+                        <div id="next" class="button">Update Summary</div>
+                    </form>
+                </div>
             </div>
 
-            <ul id="bill-list"></ul>
-        </div>
+            <div id="bills" class="show">
+                <h2>Add all of your bills</h2>
+                <div class="bills-header">
+                    <div class="item name">
+                        <input type="text" id="bill-name" placeholder="Mortgage, Water...etc">
+                    </div>
 
-        <div id="total-bills"></div>
-        
-        <div id="money-leftover"></div>
+                    <div class="item frequency">
+                        <select name="bill-frequency" id="bill-frequency">
+                            <option value="Monthly">Every Month</option>
+                            <option value="Every 2 Weeks">Every 2 Weeks</option>
+                            <option value="Quarterly">Every Quarter</option>
+                            <option value="Once">One Time</option>
+                        </select>
+                    </div>
+
+                    <div class="item cost">
+                        <input type="number" id="bill-cost" placeholder="$20">
+                    </div>
+
+                    <div class="item date">
+                        <input type="date" id="bill-date">
+                    </div>
+
+                    <div id="add-bill" class="button">Add</div>
+                </div>
+
+                <ul id="bill-list"></ul>
+            </div>
+        </div>
     
         <script src="js/moment.js"></script>
         <script src="js/main.js"></script>

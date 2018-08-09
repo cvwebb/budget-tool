@@ -21,7 +21,7 @@ var umd = '';
 userPay = function() {
     userIncome = el('user-income').value;
     userNextPay = moment(el('pay-date').value);
-    localStorage.setItem('setNextPay', JSON.stringify(userNextPay));
+    localStorage.setItem('setNextPay', JSON.stringify(userNextPay.subtract(1, 'd')));
     localStorage.setItem('setUserIncome', JSON.stringify(userIncome));
 
     userSummary();
@@ -33,7 +33,7 @@ userPay = function() {
 userSummary = function() {
     getPayDate = moment(JSON.parse(localStorage.getItem("setNextPay")));
     getUserIncome = JSON.parse(localStorage.getItem("setUserIncome"));
-    return el('date-header').innerHTML = 'Next pay date: <h4><strong>' + moment(getPayDate).format('LL') + '</strong></h4>',
+    return el('date-header').innerHTML = 'Next pay date: <h4><strong>' + moment(getPayDate).add(1, 'd').format('LL') + '</strong></h4>',
             el('income-header').innerHTML = 'Account: <h4 class="account-header"><strong>$' + getUserIncome + '</strong> </h4>'
 }
 
@@ -62,14 +62,27 @@ showBills = function() {
         var md = billDue.format('LL');
         today = moment();
 
+        var checkbox = '<div class="pretty p-icon p-round"><input type="checkbox" /><div class="state"><i class="icon mdi mdi-check"></i><label> </label></div></div>';
+        var showData = function() {
+            return el('bill-list').innerHTML += '<li class="'+ status +'"> ' + checkbox + ' <div class="align-left"><div class="aligner">' + bill[i].name + ' - </div> <div class="aligner"> $' + bill[i].cost + ' </div> </div> <div class="align-right"><div class="aligner"> ' + bill[i].frequency + ' - </div> <div class="aligner"> ' + md + ' </div> <div class="aligner"><a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a> </div> </div>' + '</li>';
+        }
+        
         if (billDue > getPayDate) {
-            el('bill-list').innerHTML += '<li class="future"> <div class="align-left"><div class="aligner">' + bill[i].name + ' - </div> <div class="aligner"> $' + bill[i].cost + ' </div> </div> <div class="align-right"><div class="aligner"> ' + bill[i].frequency + ' - </div> <div class="aligner"> ' + md + ' </div> <div class="aligner"><a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a> </div> </div>' + '</li>';
+            var status = 'future'
+            showData(status);
+
         } else if (billDue > today && billDue <= getPayDate ) {
-            el('bill-list').innerHTML += '<li class="due-soon"> <div class="align-left"><div class="aligner">' + bill[i].name + ' - </div> <div class="aligner"> $' + bill[i].cost + ' </div> </div> <div class="align-right"><div class="aligner"> ' + bill[i].frequency + ' - </div> <div class="aligner"> ' + md + ' </div> <div class="aligner"><a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a> </div> </div>' + '</li>';
+            var status = 'due-soon'
+            showData(status);
+
         } else if (billDue < today) {
-            el('bill-list').innerHTML += '<li class="past-due"> <div class="align-left"><div class="aligner">' + bill[i].name + ' - </div> <div class="aligner"> $' + bill[i].cost + ' </div> </div> <div class="align-right"><div class="aligner"> ' + bill[i].frequency + ' - </div> <div class="aligner"> ' + md + ' </div> <div class="aligner"><a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a> </div> </div>' + '</li>';
+            var status = 'past-due'
+            showData(status);
+
         } else if (billDue == today) {
-            el('bill-list').innerHTML += '<li class="due-today"> <div class="align-left"><div class="aligner">' + bill[i].name + ' - </div> <div class="aligner"> $' + bill[i].cost + ' </div> </div> <div class="align-right"><div class="aligner"> ' + bill[i].frequency + ' - </div> <div class="aligner"> ' + md + ' </div> <div class="aligner"><a href="#" id="remove-bill" data-value=' + i + '> Remove Bill</a> </div> </div>' + '</li>';
+            var status = 'due-today'
+            showData(status);
+            
         }   
     }
 };

@@ -10,6 +10,8 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
+        <link rel="stylesheet" href="http://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900" rel="stylesheet">
     </head>
     <body>
@@ -80,6 +82,21 @@
                 <ul id="bill-list"></ul>
             </div>
         </div>
+
+
+        <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD-k9ejRprQc5Z3MMQZR0G7COKdpukiFSo",
+            authDomain: "budget-app-c4726.firebaseapp.com",
+            databaseURL: "https://budget-app-c4726.firebaseio.com",
+            projectId: "budget-app-c4726",
+            storageBucket: "",
+            messagingSenderId: "435984599791"
+        };
+        firebase.initializeApp(config);
+        </script>
     
         <script src="js/moment.js"></script>
         <script src="js/main.js"></script>

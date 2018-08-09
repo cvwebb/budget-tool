@@ -1,4 +1,27 @@
 @import "../node_modules/normalize.css/normalize.css";
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: #4A4A4A;
+}
+
+a {
+  color: #4A90E2 !important;
+}
+
+#remove-bill {
+  color: #fc6576 !important;
+  padding-left: 15px;
+}
+
+strong {
+  font-weight: 700;
+}
+
 #income {
   display: block;
 }
@@ -11,10 +34,6 @@
   display: none;
 }
 
-.due-soon {
-  border: 1px solid yellow;
-}
-
 .due-today {
   border: 1px solid green;
 }
@@ -25,6 +44,218 @@
 
 .future {
   opacity: 0.2;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 30px;
+}
+
+h2 {
+  margin: 0;
+  font-weight: lighter;
+  font-size: 20px;
+}
+
+h4 {
+  margin: 0;
+}
+
+input {
+  background: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+input[type=date] {
+  background: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  padding: 8px 0;
+  color: #898989;
+}
+
+input[type=date]:before {
+  content: attr(placeholder) !important;
+  margin-right: 0.5em;
+}
+
+input[type=date]:focus:before,
+input[type=date]:valid:before {
+  content: "";
+}
+
+.select-pay {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-weight: lighter;
+  font-size: 14px;
+  margin: 5px 0 10px;
+}
+
+.button {
+  width: 100%;
+  background: #4A90E2;
+  text-align: center;
+  color: #fff;
+  padding: 11px 8px;
+  margin: auto;
+  border-radius: 5px;
+}
+
+.align-horizontal {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.align-horizontal #summary {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 49%;
+  margin: 0 0 0 1%;
+  order: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.align-horizontal #summary input[type=date] {
+  width: 100%;
+}
+.align-horizontal #income {
+  padding: 20px 10px 30px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+  margin: auto;
+  width: 49%;
+  margin-right: 1%;
+  order: 1;
+}
+.align-horizontal #income input {
+  width: 100%;
+}
+.align-horizontal #income h2 {
+  margin-bottom: 20px;
+}
+
+#bills h2 {
+  text-align: center;
+  padding: 20px;
+}
+
+.bills-header {
+  display: flex;
+  max-width: 700px;
+}
+.bills-header .item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  padding: 0;
+  color: #898989;
+  margin-right: 2%;
+}
+.bills-header .item input {
+  width: 100%;
+  background: none;
+  border: none;
+}
+.bills-header .item.name {
+  width: 20%;
+}
+.bills-header .item.frequency {
+  width: 20%;
+  background: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+}
+.bills-header .item.frequency select {
+  width: 100%;
+  background: none;
+  border: none;
+}
+.bills-header .item.cost {
+  width: 10%;
+}
+.bills-header .item.date {
+  width: 20%;
+}
+.bills-header .button {
+  width: 30%;
+  margin: initial;
+}
+
+#bill-list {
+  padding: 0;
+}
+#bill-list li {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  padding: 15px 0;
+  border-bottom: 1px dotted #ccc;
+  font-size: 12px;
+}
+
+.align-left {
+  width: 50%;
+  text-align: left;
+  display: flex;
+}
+.align-left .aligner:nth-child(even) {
+  padding-left: 3px;
+}
+
+.align-right {
+  width: 50%;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+}
+.align-right .aligner {
+  padding-left: 5px;
+  font-style: italic;
+}
+
+.account-header {
+  font-size: 30px;
+  color: #4A90E2;
+}
+
+.total-bill-header {
+  font-size: 30px;
+  color: #fc6576;
+}
+
+#date-header {
+  margin: 20px 0 10px;
+}
+#date-header h4 {
+  padding: 5px 0 5px;
+}
+
+.left-over-header {
+  font-size: 30px;
+  color: #9FCE6F;
+}
+
+.summary-key-info {
+  display: flex;
+  justify-content: space-between;
+}
+.summary-key-info div {
+  padding: 0 10px;
 }
 
 /*# sourceMappingURL=css/styles.css.map */
